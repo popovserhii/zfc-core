@@ -1,0 +1,25 @@
+{
+  "name": "popov/zfc-core",
+  "description": "ZF2 core module for Popov's module",
+  "type": "zf-module",
+  "license": "MIT",
+  "keywords": [
+    "zf2"
+  ],
+  "authors": [
+    {
+      "name": "Serhii Popov",
+      "email": "popow.sergiy@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Popov\\ZfcCore\\": "src/"
+    }
+  }
+}
