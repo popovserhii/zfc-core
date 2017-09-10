@@ -3,13 +3,22 @@ namespace Popov\ZfcCore;
 
 return [
 	'service_manager' => [
-		//'aliases' => [],
+		'aliases' => [
+		    //'Zend\Db\Adapter\AdapterInterface' => 'Zend\Db\Adapter\AdapterInterface',
+            //'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\Adapter',
+        ],
+        'invokables' => [
+            //'Zend\Db\Adapter\Adapter' => Service\Factory\ZendDbAdapterFactory::class,
+            //'Zend\Db\Adapter\AdapterInterface' => Service\Factory\ZendDbAdapterFactory::class,
+
+        ],
 		//'factories' => [],
 		'initializers' => [
 			'ConfigAwareInterface' => Service\Factory\ConfigInitializer::class,
             'DomainServiceInitializer' => Service\Factory\DomainServiceInitializer::class,
             'ObjectManagerAwareInterface' => Service\Factory\ObjectManagerInitializer::class,
 		],
+
         /*'factories' => array(
             'doctrine.cache.memcache' => function ($sm) {
                 $cache = new \Doctrine\Common\Cache\MemcacheCache();
