@@ -40,4 +40,11 @@ interface DomainServiceInterface extends EventManagerAwareInterface, ObjectManag
      * @return object Model
      */
     public function find($id);
+
+    /**
+     * Save persisted items
+     *
+     * @return void
+     */
+    public function save();
 }

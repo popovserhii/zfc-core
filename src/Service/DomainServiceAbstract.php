@@ -33,7 +33,10 @@ abstract class DomainServiceAbstract implements DomainServiceInterface
     {
         $entityName = $this->getRepository()->getClassName();
 
-        return new $entityName();
+        $entity = new $entityName();
+        $this->getObjectManager()->persist($entity);
+
+        return $entity;
     }
 
     public function getObjectName()
@@ -44,5 +47,10 @@ abstract class DomainServiceAbstract implements DomainServiceInterface
     public function find($id)
     {
         return $this->getObjectManager()->find($this->entity, $id);
+    }
+
+    public function save()
+    {
+        $this->getObjectManager()->flush();
     }
 }
