@@ -48,9 +48,4 @@ abstract class DomainServiceAbstract implements DomainServiceInterface
     {
         return $this->getObjectManager()->find($this->entity, $id);
     }
-
-    public function save()
-    {
-        $this->getObjectManager()->flush();
-    }
 }
