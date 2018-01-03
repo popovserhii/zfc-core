@@ -2,7 +2,7 @@
 /**
  * @category Popov
  * @package Popov_ZfcCore
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @author Popov Sergiy <popow.serhii@gmail.com>
  * @datetime: 06.04.2016 15:27
  */
 namespace Popov\ZfcCore\Service;

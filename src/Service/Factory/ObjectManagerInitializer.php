@@ -4,7 +4,7 @@
  *
  * @category Popov
  * @package Popov_ZfcCore
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @author Popov Sergiy <popow.serhii@gmail.com>
  * @datetime: 06.04.2016 22:57
  */
 namespace Popov\ZfcCore\Service\Factory;
@@ -15,7 +15,7 @@ use Zend\ServiceManager\ServiceManager;
 
 class ObjectManagerInitializer
 {
-    public function __invoke($instance, ServiceLocatorInterface $sm)
+    public function __invoke(ServiceLocatorInterface $sm, $instance)
     {
         if (get_class($sm) !== ServiceManager::class) {
             $sm = $sm->getServiceLocator();

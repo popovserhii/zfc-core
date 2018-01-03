@@ -4,7 +4,7 @@
  *
  * @category Popov
  * @package Popov_ZfcCore
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @author Popov Sergiy <popow.serhii@gmail.com>
  * @datetime: 14.10.2016 16:51
  */
 namespace Popov\ZfcCore\Service\Factory;

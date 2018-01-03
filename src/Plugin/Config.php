@@ -4,7 +4,7 @@
  *
  * @category Popov
  * @package Popov_Base
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @author Popov Sergiy <popow.serhii@gmail.com>
  * @datetime: 02.04.15 22:46
  */
 namespace Popov\Base\Plugin;

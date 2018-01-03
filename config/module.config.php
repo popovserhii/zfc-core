@@ -2,7 +2,7 @@
 namespace Popov\ZfcCore;
 
 return [
-	'service_manager' => [
+	'dependencies' => [
 		'aliases' => [
 		    //'Zend\Db\Adapter\AdapterInterface' => 'Zend\Db\Adapter\AdapterInterface',
             //'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\Adapter',
@@ -37,12 +37,6 @@ return [
 			'ConfigAwareInterface' => Service\Factory\ConfigInitializer::class,
             //'DomainServiceInitializer' => Service\Factory\DomainServiceInitializer::class,
             'ObjectManagerAwareInterface' => Service\Factory\ObjectManagerInitializer::class,
-		],
-	],
-
-	'view_manager' => [
-		'template_path_stack' => [
-			__DIR__ . '/../view',
 		],
 	],
 ];
