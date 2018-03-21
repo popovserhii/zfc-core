@@ -9,8 +9,11 @@
  */
 namespace Popov\ZfcCore\Service;
 
+use Doctrine\ORM\QueryBuilder;
 use Zend\EventManager\EventManagerAwareTrait;
 use DoctrineModule\Persistence\ProvidesObjectManager;
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
+use Zend\Paginator\Paginator as ZendPaginator;
 
 abstract class DomainServiceAbstract implements DomainServiceInterface
 {
@@ -23,6 +26,26 @@ abstract class DomainServiceAbstract implements DomainServiceInterface
      * @var string
      */
     protected $entity;
+
+    /**
+     * @param QueryBuilder $results
+     * @param $page
+     * @param $limit
+     * @return ZendPaginator
+     */
+    public function getPaginator(QueryBuilder $results, $page, $limit) {
+
+        if ($results instanceof QueryBuilder) {
+            $queryResults   = new DoctrinePaginator($results->getQuery());
+            $adapter        = new DoctrinePaginatorAdapter($queryResults);
+            $paginator      = new ZendPaginator($adapter);
+            $paginator->setCurrentPageNumber($page);
+            $paginator->setItemCountPerPage($limit);
+
+            return $paginator;
+        }
+    }
+
 
     public function getRepository()
     {
