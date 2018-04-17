@@ -3,6 +3,7 @@ namespace Popov\ZfcCore\Service;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository as EntityRepositoryOrm;
+use Doctrine\ORM\NativeQuery;
 use Doctrine\ORM\QueryBuilder;
 
 class EntityRepository extends EntityRepositoryOrm {
@@ -69,6 +70,18 @@ class EntityRepository extends EntityRepositoryOrm {
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param NativeQuery $query
+     * @param array $data
+     * @return NativeQuery
+     */
+    public function setParametersByArray(NativeQuery $query, array $data) {
+        for ($i = 0, $k = count($data); $i < $k; ++$i) {
+            $query->setParameter(($i + 1), $data[$i]);
+        }
+
+        return $query;
+    }
 
 	/**
 	 * @return int
