@@ -10,9 +10,10 @@ return [
         'invokables' => [
             //'Zend\Db\Adapter\Adapter' => Service\Factory\ZendDbAdapterFactory::class,
             //'Zend\Db\Adapter\AdapterInterface' => Service\Factory\ZendDbAdapterFactory::class,
-
         ],
-		//'factories' => [],
+		'factories' => [
+            'Zend\Db\Adapter\Adapter' => \Zend\Db\Adapter\AdapterServiceFactory::class,
+        ],
 		'initializers' => [
 			'ConfigAwareInterface' => Service\Factory\ConfigInitializer::class,
             'DomainServiceInitializer' => Service\Factory\DomainServiceInitializer::class,
