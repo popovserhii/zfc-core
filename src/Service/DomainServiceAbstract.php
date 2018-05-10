@@ -33,17 +33,15 @@ abstract class DomainServiceAbstract implements DomainServiceInterface
      * @param $limit
      * @return ZendPaginator
      */
-    public function getPaginator(QueryBuilder $results, $page, $limit) {
+    public function getPaginator(QueryBuilder $results, $page, $limit)
+    {
+        $queryResults = new DoctrinePaginator($results->getQuery());
+        $adapter = new DoctrinePaginatorAdapter($queryResults);
+        $paginator = new ZendPaginator($adapter);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage($limit);
 
-        if ($results instanceof QueryBuilder) {
-            $queryResults   = new DoctrinePaginator($results->getQuery());
-            $adapter        = new DoctrinePaginatorAdapter($queryResults);
-            $paginator      = new ZendPaginator($adapter);
-            $paginator->setCurrentPageNumber($page);
-            $paginator->setItemCountPerPage($limit);
-
-            return $paginator;
-        }
+        return $paginator;
     }
 
 
