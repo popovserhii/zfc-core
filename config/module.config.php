@@ -12,6 +12,7 @@ return [
             //'Zend\Db\Adapter\AdapterInterface' => Service\Factory\ZendDbAdapterFactory::class,
         ],
 		'factories' => [
+            Helper\UrlHelper::class => Helper\Factory\UrlHelperFactory::class,
             'Zend\Db\Adapter\Adapter' => \Zend\Db\Adapter\AdapterServiceFactory::class,
         ],
 		'initializers' => [
