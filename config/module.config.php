@@ -2,6 +2,15 @@
 namespace Popov\ZfcCore;
 
 return [
+    'doctrine' => [
+        'cache' => [
+            'redis' => [
+                'namespace' => __NAMESPACE__ . '_Doctrine',
+                'instance'  => __NAMESPACE__ . '\Cache\Redis',
+            ],
+        ],
+    ],
+
 	'dependencies' => [
 		'aliases' => [
 		    //'Zend\Db\Adapter\AdapterInterface' => 'Zend\Db\Adapter\AdapterInterface',
@@ -13,6 +22,8 @@ return [
         ],
 		'factories' => [
             Helper\UrlHelper::class => Helper\Factory\UrlHelperFactory::class,
+            'doctrine.cache.memcache' => Service\Factory\DoctrineMemcacheFactory::class,
+            __NAMESPACE__ . '\Cache\Redis' => Service\Factory\DoctrineRedisFactory::class,
             'Zend\Db\Adapter\Adapter' => \Zend\Db\Adapter\AdapterServiceFactory::class,
         ],
 		'initializers' => [
@@ -20,16 +31,6 @@ return [
             'DomainServiceInitializer' => Service\Factory\DomainServiceInitializer::class,
             'ObjectManagerAwareInterface' => Service\Factory\ObjectManagerInitializer::class,
 		],
-
-        /*'factories' => array(
-            'doctrine.cache.memcache' => function ($sm) {
-                $cache = new \Doctrine\Common\Cache\MemcacheCache();
-                $memcache = new \Memcache();
-                $memcache->connect('localhost', 11211);
-                $cache->setMemcache($memcache);
-                return $cache;
-            },
-        ),*/
 	],
 
 	'validators' => [

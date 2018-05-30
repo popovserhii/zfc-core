@@ -86,4 +86,63 @@ abstract class EntityRepository extends OrmEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param NativeQuery $query
+     * @param array $data
+     * @return NativeQuery
+     */
+    public function setParametersByArray(NativeQuery $query, array $data) {
+        for ($i = 0, $k = count($data); $i < $k; ++$i) {
+            $query->setParameter(($i + 1), $data[$i]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextAutoIncrement() {
+        $sql = 'SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?';
+        $stmt = $this->_em->getConnection()->prepare($sql);
+        $stmt->execute(array(
+            $this->getEntityManager()->getConnection()->getDatabase(),
+            $this->getClassMetadata()->getTableName(),
+        ));
+        $result = $stmt->fetchAll();
+        if ($result) {
+            return (int) $result[0]['AUTO_INCREMENT'];
+        }
+
+        return 1;
+    }
+
+    /**
+     * @param string|array $orderBy , example 'filed' or ['field' => 'ASC', 'field2' => 'DESC']
+     * @return EntityRepository
+     */
+    protected function addOrderBy($orderBy)
+    {
+        $order = [];
+        if (!is_array($orderBy)) {
+            if (!empty($orderBy)) {
+                $orderBy = (array) $orderBy;
+                $orderBy[$orderBy[0]] = 'ASC';
+                unset($orderBy[0]);
+            } else {
+                return $this;
+            }
+
+        }
+        foreach ($orderBy as $field => $by) {
+            $order[] = "{$field} {$by}";
+        }
+        if ($order) {
+            $this->_dql .= ' ORDER BY ' . implode(', ', $order);
+        }
+
+        return $this;
+
+    }
 }

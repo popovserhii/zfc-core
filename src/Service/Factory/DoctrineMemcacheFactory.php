@@ -12,7 +12,7 @@ namespace Popov\ZfcCore\Service\Factory;
 use Interop\Container\ContainerInterface;
 use Doctrine\Common\Cache\MemcacheCache;
 
-class DoctrineCacheFactory
+class DoctrineMemcacheFactory
 {
     public function __invoke(ContainerInterface $container)
     {
