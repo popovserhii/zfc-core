@@ -1,6 +1,8 @@
 <?php
 namespace Popov\ZfcCore;
 
+use Psr\Container\ContainerInterface;
+
 return [
     'doctrine' => [
         'cache' => [
@@ -22,6 +24,7 @@ return [
         ],
 		'factories' => [
             Helper\UrlHelper::class => Helper\Factory\UrlHelperFactory::class,
+            ContainerInterface::class => Service\Factory\ContainerFactory::class,
             'doctrine.cache.memcache' => Service\Factory\DoctrineMemcacheFactory::class,
             __NAMESPACE__ . '\Cache\Redis' => Service\Factory\DoctrineRedisFactory::class,
             'Zend\Db\Adapter\Adapter' => \Zend\Db\Adapter\AdapterServiceFactory::class,
