@@ -13,11 +13,10 @@ use Interop\Container\ContainerInterface;
 
 class TableFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container, $name)
     {
         $dbAdapter = $container->get('Zend\Db\Adapter\Adapter');
-        $tableRealName = func_get_args()[2];
-        $table = new $tableRealName($dbAdapter);
+        $table = new $name($dbAdapter);
 
         return $table;
     }
