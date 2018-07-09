@@ -15,22 +15,15 @@
 
 namespace Popov\ZfcCore\Helper\Factory;
 
+use Popov\ZfcCore\Helper\Config;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Application;
-use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\Expressive\Helper\UrlHelper as ExpressiveUrlHelper;
-use Popov\ZfcCore\Helper\UrlHelper;
 
-class UrlHelperFactory
+class ConfigFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $isExpressive = class_exists(Application::class);
+        $config = $container->get('config');
 
-        $urlHelper = $isExpressive
-            ? $container->get(ExpressiveUrlHelper::class)
-            : $container->get('ViewHelperManager')->get('url');
-
-        return new UrlHelper($urlHelper);
+        return (new Config())->merge($config);
     }
 }

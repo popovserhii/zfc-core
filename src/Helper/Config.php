@@ -7,7 +7,7 @@
  * @author Popov Sergiy <popow.serhii@gmail.com>
  * @datetime: 02.04.15 22:46
  */
-namespace Popov\Base\Plugin;
+namespace Popov\ZfcCore\Helper;
 
 use ArrayAccess;
 use Countable;
@@ -19,8 +19,7 @@ class Config implements Countable, Iterator, ArrayAccess {
 	protected $data = [];
 
 	/**
-	 * Used when unsetting values during iteration to ensure we do not skip
-	 * the next element.
+	 * Used when unsetting values during iteration to ensure we do not skip the next element.
 	 *
 	 * @var bool
 	 */
@@ -39,7 +38,8 @@ class Config implements Countable, Iterator, ArrayAccess {
 			throw new Exception\InvalidArgumentException("You cannot merge property {$property}. This property doesn't exist.");
 		}
 
-		(new ArrayUtils())->merge($this->{$property}, $data);
+		//(new ArrayUtil())->merge($this->{$property}, $data);
+        $this->{$property} = array_merge_recursive($this->{$property}, $data);
 
 		return $this;
 	}

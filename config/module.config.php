@@ -23,6 +23,7 @@ return [
             //'Zend\Db\Adapter\AdapterInterface' => Service\Factory\ZendDbAdapterFactory::class,
         ],
 		'factories' => [
+            Helper\Config::class => Helper\Factory\ConfigFactory::class,
             Helper\UrlHelper::class => Helper\Factory\UrlHelperFactory::class,
             ContainerInterface::class => Service\Factory\ContainerFactory::class,
             'doctrine.cache.memcache' => Service\Factory\DoctrineMemcacheFactory::class,
@@ -35,6 +36,18 @@ return [
             'ObjectManagerAwareInterface' => Service\Factory\ObjectManagerInitializer::class,
 		],
 	],
+
+    'controller_plugins' => [
+        'aliases' => [
+            'config' => Controller\Plugin\ConfigPlugin::class,
+        ],
+    ],
+
+    'view_helpers' => [
+        'aliases' => [
+            'config' => View\Helper\ConfigHelper::class,
+        ],
+    ],
 
 	'validators' => [
 		//'aliases' => [],
