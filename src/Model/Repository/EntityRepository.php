@@ -23,12 +23,12 @@ use Doctrine\ORM\Query;
 abstract class EntityRepository extends OrmEntityRepository
 {
     // New
-    protected $alias = 'e';
+    protected $_alias = 'e';
 
 
     public function getAlias()
     {
-        return $this->alias;
+        return $this->_alias;
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class EntityRepository extends OrmEntityRepository
      * @return string
      */
     public function getFieldAlias($field) {
-        return (strpos($field, '.')) ? $field : $this->alias . '.' . $field;
+        return (strpos($field, '.')) ? $field : $this->_alias . '.' . $field;
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class EntityRepository extends OrmEntityRepository
     public function findByQuery(\Closure $closure)
     {
         /** @var QueryBuilder $queryBuilder */
-        $queryBuilder = $this->createQueryBuilder($this->alias);
+        $queryBuilder = $this->createQueryBuilder($this->_alias);
         $currentQuery = $closure($queryBuilder);
 
         return $currentQuery;
@@ -61,7 +61,7 @@ abstract class EntityRepository extends OrmEntityRepository
      */
     public function findByCriteria(Criteria $query)
     {
-        $queryBuilder = $this->createQueryBuilder($this->alias);
+        $queryBuilder = $this->createQueryBuilder($this->_alias);
         $currentQuery = call_user_func($query, $queryBuilder);
 
         return $currentQuery->getQuery()->getResult();
