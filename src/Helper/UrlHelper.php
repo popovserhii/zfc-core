@@ -24,8 +24,8 @@ class UrlHelper
         $this->urlHelper = $urlHelper;
     }
 
-    public function generate($route, $params)
+    public function generate($route, $params, array $options = null)
     {
-        return ($this->urlHelper)($route, $params);
+        return ($this->urlHelper)($route, $params, $options);
     }
 }
